@@ -90,7 +90,7 @@
 <canvas id="bg" aria-hidden="true"></canvas>
 
 <nav><div class="wrap">
-  <a class="brand" href="#top"><img class="mark" src="icon.png" alt="SDP" onerror="this.style.display='none'"><span>SDP</span></a>
+  <a class="brand" href="#top"><svg class="mark" viewBox="0 0 32 32" aria-label="SDP"><defs><linearGradient id="bm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#e9a5f5"/></linearGradient><radialGradient id="bc" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><rect width="32" height="32" rx="9" fill="url(#bm)"/><ellipse cx="16" cy="16" rx="10" ry="4" fill="none" stroke="#fff" stroke-opacity="0.5" stroke-width="1.3" transform="rotate(-24 16 16)"/><circle cx="16" cy="16" r="6.5" fill="url(#bc)" opacity="0.7"/><circle cx="16" cy="16" r="3.2" fill="#fff"/><circle cx="25" cy="12" r="1.5" fill="#fff"/><circle cx="7.5" cy="20.5" r="1.2" fill="#fff" fill-opacity="0.9"/></svg><span>SDP</span></a>
   <div class="links"><a href="#work">Work</a><a href="#contact">Contact</a></div>
 </div></nav>
 
@@ -173,7 +173,7 @@
   var x=c.getContext('2d'); if(!x) return;
   var TAU=Math.PI*2, reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var W,H,DPR,cx,R,heroCY,docH,N,rot=0,_cos=1,_sin=0,ct=Math.cos(.42),st=Math.sin(.42);
-  var pts=[],outer=[],P=[],TPL=null;
+  var pts=[],outer=[],P=[],TPL=null,sprite=document.createElement('canvas'),sctx=sprite.getContext('2d');
 
   function docHeight(){return Math.max(document.body.scrollHeight,document.documentElement.scrollHeight,innerHeight);}
   function buildSphere(){pts=[];for(var i=0;i<N;i++){var t=(i+0.5)/N,phi=Math.acos(1-2*t),th=Math.PI*(1+Math.sqrt(5))*i;pts.push({x:Math.sin(phi)*Math.cos(th),y:Math.sin(phi)*Math.sin(th),z:Math.cos(phi)});}
@@ -194,18 +194,21 @@
   }
   function mkCreature(dx,dy,kind){var fish=kind==='fish';var sgn=Math.random()<0.5?1:-1;return{dx:dx,dy:dy,kind:kind,tpl:fish?TPL.fish:TPL.jelly,vx:sgn*(fish?(0.13+Math.random()*0.16):(0.05+Math.random()*0.07))*DPR,hue:190+Math.random()*70,ph:Math.random()*TAU,size:(fish?15:17)*(0.85+Math.random()*0.4)*DPR,dir:sgn};}
   function seed(){P=[];var lo=heroCY+H*0.7,span=Math.max(1,docH-lo),rows=Math.max(2,Math.round(span/(H*0.55))),cols=4;for(var r=0;r<rows;r++)for(var cc=0;cc<cols;cc++){var dx=(cc+0.5)/cols*W+(Math.random()-0.5)*W*0.16,dy=lo+(r+0.5)/rows*span+(Math.random()-0.5)*(span/rows)*0.6;P.push(mkCreature(dx,dy,Math.random()<0.6?'fish':'jelly'));}}
-  function resize(){DPR=Math.min(devicePixelRatio||1,2);W=c.width=Math.floor(innerWidth*DPR);H=c.height=Math.floor(innerHeight*DPR);c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';cx=W*0.5;R=Math.min(W,H)*0.23;heroCY=H*0.42;docH=docHeight()*DPR;N=Math.min(1100,Math.round(innerWidth*0.9));buildSphere();if(!TPL)buildTemplates();seed();}
+  function resize(){DPR=Math.min(devicePixelRatio||1,2);W=c.width=Math.floor(innerWidth*DPR);H=c.height=Math.floor(innerHeight*DPR);c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';cx=W*0.5;R=Math.min(W,H)*0.23;heroCY=H*0.42;docH=docHeight()*DPR;N=Math.min(1100,Math.round(innerWidth*0.9));buildSprite();buildSphere();if(!TPL)buildTemplates();seed();}
 
   function proj(p){var X=p.x*_cos+p.z*_sin,Z=-p.x*_sin+p.z*_cos,Y=p.y*ct-Z*st,Z2=p.y*st+Z*ct,persp=1/(1.9-Z2*0.5);return{ox:X*R*persp,oy:Y*R*persp,d:(Z2+1)/2,down:p.y};}
+  function buildSprite(){var S=Math.round(30*DPR);sprite.width=sprite.height=S;var g=sctx.createRadialGradient(S/2,S/2,0,S/2,S/2,S/2);g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(0.22,'rgba(216,220,255,0.78)');g.addColorStop(0.55,'rgba(172,162,255,0.24)');g.addColorStop(1,'rgba(150,140,255,0)');sctx.clearRect(0,0,S,S);sctx.fillStyle=g;sctx.fillRect(0,0,S,S);}
+  function dot(gx,gy,rad,a){if(a<=0)return;x.globalAlpha=a>1?1:a;var ds=(rad+0.7)*5;x.drawImage(sprite,gx-ds*0.5,gy-ds*0.5,ds,ds);}
 
   function drawSphere(scy,now){
-    var cg=x.createRadialGradient(cx,scy,0,cx,scy,R*0.92);cg.addColorStop(0,'rgba(206,209,255,0.26)');cg.addColorStop(0.55,'rgba(140,120,255,0.08)');cg.addColorStop(1,'rgba(120,110,255,0)');
-    x.fillStyle=cg;x.beginPath();x.arc(cx,scy,R*0.92,0,TAU);x.fill();
+    var cg=x.createRadialGradient(cx,scy,0,cx,scy,R*1.0);cg.addColorStop(0,'rgba(210,212,255,0.3)');cg.addColorStop(0.5,'rgba(140,120,255,0.09)');cg.addColorStop(1,'rgba(120,110,255,0)');
+    x.globalAlpha=1;x.fillStyle=cg;x.beginPath();x.arc(cx,scy,R*1.0,0,TAU);x.fill();
     var oc=Math.cos(rot*0.7+0.5),os=Math.sin(rot*0.7+0.5);
-    for(var j=0;j<outer.length;j++){var o=outer[j],X=o.x*oc+o.z*os,Z=-o.x*os+o.z*oc,Y=o.y*ct-Z*st,Z2=o.y*st+Z*ct,persp=1/(1.9-Z2*0.5),d=(Z2+1)/2,tw=0.4+0.6*(0.5+0.5*Math.sin(now*0.002+o.tw)),a=(0.04+d*0.26)*tw,rad=(0.3+d*0.7)*DPR;
-      x.fillStyle='rgba(196,204,255,'+a+')';x.beginPath();x.arc(cx+X*R*persp,scy+Y*R*persp,rad,0,TAU);x.fill();}
-    for(var i=0;i<N;i++){var pr=proj(pts[i]),d2=pr.d,a2=(0.12+Math.pow(d2,2.3)*0.82)*(0.86+0.14*Math.sin(now*0.004+i)),rad2=(0.35+d2*d2*1.05)*DPR;
-      x.fillStyle='rgba('+((155+d2*100)|0)+','+((160+d2*80)|0)+',255,'+a2+')';x.beginPath();x.arc(cx+pr.ox,scy+pr.oy,rad2,0,TAU);x.fill();}
+    for(var j=0;j<outer.length;j++){var o=outer[j],X=o.x*oc+o.z*os,Z=-o.x*os+o.z*oc,Y=o.y*ct-Z*st,Z2=o.y*st+Z*ct,persp=1/(1.9-Z2*0.5),d=(Z2+1)/2,tw=0.4+0.6*(0.5+0.5*Math.sin(now*0.002+o.tw));
+      dot(cx+X*R*persp,scy+Y*R*persp,(0.35+d*0.85)*DPR,(0.05+d*0.3)*tw);}
+    for(var i=0;i<N;i++){var pr=proj(pts[i]),d2=pr.d;
+      dot(cx+pr.ox,scy+pr.oy,(0.45+d2*d2*1.2)*DPR,(0.13+Math.pow(d2,2.3)*0.82)*(0.86+0.14*Math.sin(now*0.004+i)));}
+    x.globalAlpha=1;
   }
   function spawnDrip(scy){var p=pts[(Math.random()*N)|0],pr=proj(p);if(pr.down<0.25)return;
     P.push({dx:cx+pr.ox,dy:heroCY+pr.oy,kind:'drip',vx:pr.ox/R*0.1*DPR,vy:0.45*DPR,hue:206+Math.random()*32,ph:Math.random()*TAU,size:(1.0+Math.random()*0.6)*DPR});}

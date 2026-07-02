@@ -177,8 +177,9 @@
   var pts=[],gal=[],outer=[],P=[],TPL=null,sprite=document.createElement('canvas'),sctx=sprite.getContext('2d');
 
   function docHeight(){return Math.max(document.body.scrollHeight,document.documentElement.scrollHeight,innerHeight);}
-  function buildSphere(){pts=[];gal=[];for(var i=0;i<N;i++){var t=(i+0.5)/N,phi=Math.acos(1-2*t),th=Math.PI*(1+Math.sqrt(5))*i;pts.push({x:Math.sin(phi)*Math.cos(th),y:Math.sin(phi)*Math.sin(th),z:Math.cos(phi)});
-      var gt=i/N,arm=i%3,gr=Math.pow(gt,0.6)*1.18,ga=gt*10+arm*(TAU/3);gal.push({x:Math.cos(ga)*gr,y:(Math.random()-0.5)*0.14*(1-gt*0.7),z:Math.sin(ga)*gr});}
+  function buildSphere(){pts=[];gal=[];for(var i=0;i<N;i++){var t=(i+0.5)/N,phi=Math.acos(1-2*t),th=Math.PI*(1+Math.sqrt(5))*i,jx=(Math.random()-0.5)*0.15,jy=(Math.random()-0.5)*0.15,jz=(Math.random()-0.5)*0.15;
+      pts.push({x:Math.sin(phi)*Math.cos(th)+jx,y:Math.sin(phi)*Math.sin(th)+jy,z:Math.cos(phi)+jz});
+      var gt=i/N,arm=i%3,gr=Math.pow(gt,0.6)*1.18,ga=gt*10+arm*(TAU/3);gal.push({x:Math.cos(ga)*gr+(Math.random()-0.5)*0.2,y:(Math.random()-0.5)*0.18*(1-gt*0.6),z:Math.sin(ga)*gr+(Math.random()-0.5)*0.2});}
     outer=[];var M=Math.round(N*0.5);for(var j=0;j<M;j++){var t2=(j+0.5)/M,ph2=Math.acos(1-2*t2),th2=Math.PI*(1+Math.sqrt(5))*j*1.7,rr=1.16+Math.random()*0.55;outer.push({x:Math.sin(ph2)*Math.cos(th2)*rr,y:Math.sin(ph2)*Math.sin(th2)*rr,z:Math.cos(ph2)*rr,tw:Math.random()*TAU});}}
   function fillE(a,n,rx,ry,f){for(var i=0;i<n;i++){var r=Math.sqrt(Math.random()),ang=Math.random()*TAU;a.push({x:Math.cos(ang)*r*rx,y:Math.sin(ang)*r*ry,f:f||0});}}
   function buildTemplates(){
@@ -209,12 +210,12 @@
     var cg=x.createRadialGradient(cx,scy,0,cx,scy,R*1.0);cg.addColorStop(0,'rgba(210,212,255,'+(0.3*(1-m*0.5))+')');cg.addColorStop(0.5,'rgba(140,120,255,0.09)');cg.addColorStop(1,'rgba(120,110,255,0)');
     x.globalAlpha=1;x.fillStyle=cg;x.beginPath();x.arc(cx,scy,R*1.0,0,TAU);x.fill();
     var oc=Math.cos(rot*0.7+0.5),os=Math.sin(rot*0.7+0.5);
-    for(var j=0;j<outer.length;j++){var o=outer[j],wo=1+iw*(0.04*Math.sin(o.y*3+now*0.0022)+0.03*Math.sin(o.x*3.5-now*0.0018)),ox=o.x*wo,oy=o.y*wo,oz=o.z*wo,X=ox*oc+oz*os,Z=-ox*os+oz*oc,Y=oy*ct-Z*st,Z2=oy*st+Z*ct,persp=1/(1.9-Z2*0.5),d=(Z2+1)/2,tw=0.4+0.6*(0.5+0.5*Math.sin(now*0.002+o.tw));
-      dot(cx+X*R*persp,scy+Y*R*persp,(0.35+d*0.85)*DPR,(0.05+d*0.3)*tw*(1-m*0.55));}
+    for(var j=0;j<outer.length;j++){var o=outer[j],wo=1+iw*(0.024*Math.sin(o.y*2.6+now*0.0014)+0.017*Math.sin(o.x*3.2-now*0.0011)),ox=o.x*wo,oy=o.y*wo,oz=o.z*wo,X=ox*oc+oz*os,Z=-ox*os+oz*oc,Y=oy*ct-Z*st,Z2=oy*st+Z*ct,persp=1/(1.9-Z2*0.5),d=(Z2+1)/2,tw=0.55+0.45*(0.5+0.5*Math.sin(now*0.0013+o.tw));
+      dot(cx+X*R*persp,scy+Y*R*persp,(0.4+d*0.9)*DPR,(0.05+d*0.3)*tw*(1-m*0.55));}
     for(var i=0;i<N;i++){var s=pts[i],g=gal[i],px=s.x+(g.x-s.x)*m,py=s.y+(g.y-s.y)*m,pz=s.z+(g.z-s.z)*m,
-      wv=1+iw*(0.05*Math.sin(s.y*3+now*0.0022)+0.035*Math.sin(s.x*4-now*0.0018)+0.025*Math.sin(s.z*3.5+now*0.0026)),
+      wv=1+iw*(0.026*Math.sin(s.y*2.6+now*0.0014)+0.018*Math.sin(s.x*3.4-now*0.0011)+0.013*Math.sin(s.z*3+now*0.0017)),
       pr=proj({x:px*wv,y:py*wv,z:pz*wv}),d2=pr.d;
-      dot(cx+pr.ox,scy+pr.oy,(0.45+d2*d2*1.2)*DPR,(0.13+Math.pow(d2,2.3)*0.82)*(0.86+0.14*Math.sin(now*0.004+i)));}
+      dot(cx+pr.ox,scy+pr.oy,(0.5+d2*d2*1.28)*DPR,(0.14+Math.pow(d2,2.3)*0.8)*(0.93+0.07*Math.sin(now*0.0025+i)));}
     x.globalAlpha=1;
   }
   function spawnDrip(scy){var p=pts[(Math.random()*N)|0],pr=proj(p);if(pr.down<0.35)return;
@@ -238,7 +239,7 @@
       x.fillStyle='hsla('+p.hue+',92%,'+li+'%,'+a+')';x.beginPath();x.arc(gx,gy,rr,0,TAU);x.fill();}}
   var raf;
   function frame(now){
-    rot+=0.0013;_cos=Math.cos(rot);_sin=Math.sin(rot);
+    rot+=0.00095;_cos=Math.cos(rot);_sin=Math.sin(rot);
     var scroll=(window.scrollY||window.pageYOffset||0)*DPR, scy=heroCY-scroll;
     x.clearRect(0,0,W,H);
     x.globalCompositeOperation='lighter';

@@ -6,7 +6,8 @@
 <title>SDP — Indie tools & games</title>
 <meta name="description" content="Indie game developer crafting focused tools for Unity creators. Maker of Animator Remote and the Prefab Workflow tools." />
 <meta name="theme-color" content="#06070e" />
-<link rel="icon" href="icon.png" />
+<link rel="icon" href="favicon.png" />
+<link rel="apple-touch-icon" href="favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -210,12 +211,12 @@
       dot(cx+pr.ox,scy+pr.oy,(0.45+d2*d2*1.2)*DPR,(0.13+Math.pow(d2,2.3)*0.82)*(0.86+0.14*Math.sin(now*0.004+i)));}
     x.globalAlpha=1;
   }
-  function spawnDrip(scy){var p=pts[(Math.random()*N)|0],pr=proj(p);if(pr.down<0.25)return;
-    P.push({dx:cx+pr.ox,dy:heroCY+pr.oy,kind:'drip',vx:pr.ox/R*0.1*DPR,vy:0.45*DPR,hue:206+Math.random()*32,ph:Math.random()*TAU,size:(1.0+Math.random()*0.6)*DPR});}
-  function drawDrip(sx,sy,p){var len=Math.min(14*DPR,p.vy*8);var g=x.createLinearGradient(sx,sy-len,sx,sy);
-    g.addColorStop(0,'hsla('+p.hue+',95%,82%,0)');g.addColorStop(1,'hsla('+p.hue+',95%,84%,0.55)');
-    x.strokeStyle=g;x.lineWidth=p.size*0.7;x.lineCap='round';x.beginPath();x.moveTo(sx,sy-len);x.lineTo(sx,sy);x.stroke();
-    x.fillStyle='hsla('+p.hue+',96%,86%,0.95)';x.beginPath();x.arc(sx,sy,p.size*0.8,0,TAU);x.fill();}
+  function spawnDrip(scy){var p=pts[(Math.random()*N)|0],pr=proj(p);if(pr.down<0.35)return;
+    P.push({dx:cx+pr.ox,dy:heroCY+pr.oy,kind:'drip',vx:pr.ox/R*0.04*DPR,vy:0.1*DPR,hue:206+Math.random()*28,ph:Math.random()*TAU,size:(1.4+Math.random()*0.7)*DPR});}
+  function drawDrip(sx,sy,p){x.globalAlpha=1;var len=Math.min(16*DPR,p.vy*10+3*DPR);
+    x.strokeStyle='hsla('+p.hue+',95%,86%,0.35)';x.lineWidth=p.size*0.5;x.lineCap='round';x.beginPath();x.moveTo(sx,sy-len);x.lineTo(sx,sy);x.stroke();
+    dot(sx,sy,p.size*1.5,0.85);x.globalAlpha=1;
+    x.fillStyle='hsla('+p.hue+',96%,92%,0.95)';x.beginPath();x.arc(sx,sy,p.size*0.55,0,TAU);x.fill();}
   function spawnSplash(dx,dy,hue){P.push({kind:'ring',dx:dx,dy:dy,r:2*DPR,life:1,hue:hue});
     var n=8+(Math.random()*5|0);for(var k=0;k<n;k++){var ang=-Math.PI*0.5+(Math.random()-0.5)*Math.PI*0.95,sp=(0.7+Math.random()*1.7)*DPR;
       P.push({kind:'splash',dx:dx,dy:dy,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp,life:1,hue:hue,size:(0.8+Math.random()*0.9)*DPR});}}
@@ -237,9 +238,9 @@
     x.clearRect(0,0,W,H);
     x.globalCompositeOperation='lighter';
     if(scy>-R*2.2&&scy<H+R*2.2) drawSphere(scy,now);
-    if(scy>-R&&Math.random()<0.16) spawnDrip(scy);
+    if(scy>-R&&Math.random()<0.055) spawnDrip(scy);
     for(var i=P.length-1;i>=0;i--){var p=P[i];
-      if(p.kind==='drip'){p.vy+=0.016*DPR;p.vx+=Math.sin(now*0.003+p.ph)*0.006*DPR;p.dx+=p.vx;p.dy+=p.vy;
+      if(p.kind==='drip'){p.vy+=0.0085*DPR;p.vx+=Math.sin(now*0.002+p.ph)*0.003*DPR;p.dx+=p.vx;p.dy+=p.vy;
         if(p.dy>heroCY+H*0.52){spawnSplash(p.dx,p.dy,p.hue);P.splice(i,1);continue;}}
       else if(p.kind==='splash'){p.vy+=0.05*DPR;p.dx+=p.vx;p.dy+=p.vy;p.life-=0.028;if(p.life<=0){P.splice(i,1);continue;}}
       else if(p.kind==='ring'){p.r+=1.6*DPR;p.life-=0.05;if(p.life<=0){P.splice(i,1);continue;}}

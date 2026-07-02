@@ -213,9 +213,8 @@
   }
   function spawnDrip(scy){var p=pts[(Math.random()*N)|0],pr=proj(p);if(pr.down<0.35)return;
     P.push({dx:cx+pr.ox,dy:heroCY+pr.oy,kind:'drip',vx:pr.ox/R*0.04*DPR,vy:0.1*DPR,hue:206+Math.random()*28,ph:Math.random()*TAU,size:(1.4+Math.random()*0.7)*DPR});}
-  function drawDrip(sx,sy,p){x.globalAlpha=1;var len=Math.min(16*DPR,p.vy*10+3*DPR);
-    x.strokeStyle='hsla('+p.hue+',95%,86%,0.35)';x.lineWidth=p.size*0.5;x.lineCap='round';x.beginPath();x.moveTo(sx,sy-len);x.lineTo(sx,sy);x.stroke();
-    dot(sx,sy,p.size*1.5,0.85);x.globalAlpha=1;
+  function drawDrip(sx,sy,p){x.globalAlpha=1;
+    dot(sx,sy,p.size*1.6,0.85);x.globalAlpha=1;
     x.fillStyle='hsla('+p.hue+',96%,92%,0.95)';x.beginPath();x.arc(sx,sy,p.size*0.55,0,TAU);x.fill();}
   function spawnSplash(dx,dy,hue){P.push({kind:'ring',dx:dx,dy:dy,r:2*DPR,life:1,hue:hue});
     var n=8+(Math.random()*5|0);for(var k=0;k<n;k++){var ang=-Math.PI*0.5+(Math.random()-0.5)*Math.PI*0.95,sp=(0.7+Math.random()*1.7)*DPR;

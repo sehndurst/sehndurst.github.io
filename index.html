@@ -3,12 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Sehndurst — Indie tools & games</title>
-<meta name="description" content="Sehndurst — indie game developer crafting focused tools for Unity creators. Maker of Animator Remote and the Prefab Workflow tools." />
+<title>Sehndurst — Solo MMO dev & indie tools</title>
+<meta name="description" content="Sehndurst — solo developer building an MMO where NPCs live and die. Devlog, Blender modeling process, and small Unity tools for creators." />
 <meta name="theme-color" content="#0b0c0f" />
-<meta property="og:title" content="Sehndurst — Indie tools & games" />
-<meta property="og:description" content="Small, focused tools that make creative work feel good — built for Unity creators." />
-<meta property="og:image" content="https://sehndurst.com/cover.png" />
+<meta property="og:title" content="Sehndurst — Solo MMO dev & indie tools" />
+<meta property="og:description" content="Building an MMO where NPCs live and die — devlog, modeling process, and small Unity tools." />
+<meta property="og:image" content="https://sehndurst.com/cover.png?v=2" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 <meta property="og:url" content="https://sehndurst.com/" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" href="favicon.png" />
@@ -112,7 +114,8 @@
   .hero h1 .acid{text-shadow:0 0 34px rgba(184,255,47,.35)}
   @keyframes wordup{to{opacity:1;transform:none}}
   .cursor{display:inline-block;width:.45ch;height:.82em;background:var(--acid);vertical-align:-.06em;margin-left:.12ch;animation:blink 1s steps(1) infinite}
-  .hero p.lead{font-size:clamp(16px,2.3vw,21px);color:var(--ink2);max-width:540px;opacity:0;animation:wordup .6s .5s cubic-bezier(.2,.8,.2,1) forwards;transform:translateY(14px)}
+  .hero p.lead{font-size:clamp(16px,2.3vw,21px);color:var(--ink2);max-width:560px;opacity:0;animation:wordup .6s .5s cubic-bezier(.2,.8,.2,1) forwards;transform:translateY(14px)}
+  .hero p.lead2{font-size:14px;color:var(--mut);max-width:540px;margin-top:12px;opacity:0;animation:wordup .6s .62s cubic-bezier(.2,.8,.2,1) forwards;transform:translateY(14px)}
   .cta{display:flex;gap:16px;margin-top:38px;flex-wrap:wrap;opacity:0;animation:wordup .6s .68s cubic-bezier(.2,.8,.2,1) forwards;transform:translateY(14px)}
   .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--px-font);font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:14px 22px;border-radius:6px;border:2px solid transparent;transition:transform .12s steps(2,end),box-shadow .12s steps(2,end),color .15s,border-color .15s,background .15s}
   .btn.primary{background:var(--acid);color:#0b0c0f;border-color:var(--acid);box-shadow:4px 4px 0 rgba(184,255,47,.22)}
@@ -203,7 +206,7 @@
 
   @media (prefers-reduced-motion: reduce){
     *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
-    .hero h1 .w,.hero p.lead,.cta{opacity:1;transform:none}
+    .hero h1 .w,.hero p.lead,.hero p.lead2,.cta{opacity:1;transform:none}
     .js .reveal{opacity:1;transform:none}
     html{scroll-behavior:auto}
   }
@@ -235,17 +238,18 @@
   <span class="sprite star drift d2" style="bottom:26%;right:26%;transform:scale(.7)"></span>
   <span class="sprite star twinkle" style="top:16%;left:38%;transform:scale(.6);animation-delay:.9s"></span>
   <div class="wrap">
-    <span class="kicker"><span class="blip"></span>Indie tools &amp; games</span>
+    <span class="kicker"><span class="blip"></span>Solo MMO developer</span>
     <h1>
-      <span class="w" style="animation-delay:.05s">Crafting</span>
-      <span class="w acid" style="animation-delay:.16s">tools</span>
-      <span class="w acid" style="animation-delay:.24s">&amp;</span>
-      <span class="w acid" style="animation-delay:.32s">games.<span class="cursor" aria-hidden="true"></span></span>
+      <span class="w" style="animation-delay:.05s">Building</span>
+      <span class="w" style="animation-delay:.14s">an</span>
+      <span class="w acid" style="animation-delay:.24s">MMO,</span>
+      <span class="w" style="animation-delay:.34s">alone.<span class="cursor" aria-hidden="true"></span></span>
     </h1>
-    <p class="lead">Small, focused tools that make creative work feel good — built for Unity creators, one detail at a time.</p>
+    <p class="lead" lang="ja">ひとりでMMOを作っています。NPCが生きて死ぬ世界がテーマ。制作記録とモデリングの過程を不定期に。</p>
+    <p class="lead2">An MMO where NPCs live and die — devlog &amp; modeling process, posted now and then. I also ship small Unity tools along the way.</p>
     <div class="cta">
-      <a class="btn primary" href="#work">▶ See my work</a>
-      <a class="btn ghost" href="#contact">Get in touch</a>
+      <a class="btn primary" href="https://x.com/sehndurst" target="_blank" rel="noopener">▶ Follow the devlog</a>
+      <a class="btn ghost" href="#work">See the tools</a>
     </div>
   </div>
   <div class="scroll-hint">Scroll<span class="arr">▼</span></div>
@@ -357,7 +361,7 @@ State     <span class="dim">Idle</span> ▶ <span class="on">Run</span></pre>
       <h2>Let's <span class="acid">build</span> something.</h2>
       <p>Questions, feedback, or just want to say hi? I'd love to hear from you.</p>
       <div class="cta" style="justify-content:center;margin-top:0;opacity:1;animation:none;transform:none">
-        <a class="btn primary" href="mailto:contact@sehndurst.com">Email me</a>
+        <a class="btn primary" href="#contact" data-mailto>Email me</a>
         <a class="btn ghost" href="https://x.com/sehndurst" target="_blank" rel="noopener">X · @sehndurst</a>
         <a class="btn ghost" href="https://github.com/sehndurst" target="_blank" rel="noopener">GitHub</a>
       </div>
@@ -369,13 +373,23 @@ State     <span class="dim">Idle</span> ▶ <span class="on">Run</span></pre>
 <footer><div class="wrap">
   <span>© <span id="yr"></span> Sehndurst</span>
   <span class="gg">Thank you for playing<span class="px-heart"><span class="sprite heart" style="position:absolute;top:0;left:0"></span></span></span>
-  <span><a href="mailto:contact@sehndurst.com">contact@sehndurst.com</a></span>
+  <span><a href="#contact" data-mailto data-mailto-show>contact [at] sehndurst [dot] com</a></span>
 </div></footer>
 
 <div id="toast" role="status"></div>
 
 <script>
   document.getElementById('yr').textContent=new Date().getFullYear();
+
+  /* email is assembled at runtime so the address never appears in the HTML source (anti-scraper) */
+  (function(){
+    var p=['contact','sehndurst','com'];
+    var m=p[0]+'@'+p[1]+'.'+p[2];
+    document.querySelectorAll('[data-mailto]').forEach(function(el){
+      el.setAttribute('href','mai'+'lto:'+m);
+      if(el.hasAttribute('data-mailto-show'))el.textContent=m;
+    });
+  })();
 
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});

@@ -129,6 +129,16 @@
   .scroll-hint{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);font-family:var(--px-font);font-size:9px;letter-spacing:.22em;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:7px}
   .scroll-hint .arr{color:var(--acid);animation:drift 1.6s steps(3) infinite;font-size:12px}
 
+  /* ── countdown ── */
+  .cd-wrap{display:flex;flex-direction:column;align-items:center;text-align:center;width:100%}
+  .cd{display:flex;align-items:flex-start;justify-content:center;gap:clamp(6px,2vw,22px);margin:34px 0 22px}
+  .cd .u{display:flex;flex-direction:column;align-items:center;min-width:clamp(58px,15vw,150px)}
+  .cd .n{font-family:var(--px-font);font-weight:700;font-size:clamp(34px,10vw,112px);line-height:1;color:#fff;text-shadow:0 0 34px rgba(184,255,47,.35);font-variant-numeric:tabular-nums}
+  .cd .l{margin-top:14px;font-family:var(--px-font);font-size:clamp(8px,1.6vw,11px);letter-spacing:.2em;text-transform:uppercase;color:var(--acid)}
+  .cd .sep{font-family:var(--px-font);font-size:clamp(28px,8vw,90px);line-height:1;color:var(--acid);animation:blink 1s steps(1) infinite}
+  .cd-date{font-family:var(--mono);font-size:14px;color:var(--mut);letter-spacing:.06em}
+  .cd-open{display:inline-block;margin-top:30px}
+
   /* ── sections ── */
   section.block{position:relative;z-index:1;padding:72px 0}
   .eyebrow{font-family:var(--px-font);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--acid);margin-bottom:14px}
@@ -233,7 +243,7 @@
       <rect x="0" y="20" width="4" height="4"/><rect x="8" y="20" width="4" height="4"/><rect x="20" y="20" width="4" height="4"/><rect x="28" y="20" width="4" height="4"/>
     </svg>
     <span>SEHNDURST</span></a>
-  <div class="links"><span class="score" id="score" aria-hidden="true">SCORE 000000</span><a href="#work">Work</a><a href="#contact">Contact</a></div>
+  <div class="links"><span class="score" id="score" aria-hidden="true">SCORE 000000</span><a href="#contact">Contact</a></div>
 </div></nav>
 
 <header class="hero" id="top">
@@ -241,120 +251,20 @@
   <span class="sprite star twinkle" style="top:32%;left:7%"></span>
   <span class="sprite star drift d2" style="bottom:26%;right:26%;transform:scale(.7)"></span>
   <span class="sprite star twinkle" style="top:16%;left:38%;transform:scale(.6);animation-delay:.9s"></span>
-  <div class="wrap">
-    <span class="kicker"><span class="blip"></span>Solo MMO dev &amp; tool maker</span>
-    <h1>
-      <span class="w" style="animation-delay:.05s">Crafting</span>
-      <span class="w acid" style="animation-delay:.16s">tools</span>
-      <span class="w acid" style="animation-delay:.24s">&amp;</span>
-      <span class="w acid" style="animation-delay:.32s">games.<span class="cursor" aria-hidden="true"></span></span>
-    </h1>
-    <p class="lead">An MMO where NPCs live and die — that's the world I'm building, alone. I share the devlog and modeling process every now and then.</p>
-    <p class="lead2">I also craft small, focused Unity tools that make creative work feel good.</p>
-    <div class="cta">
-      <a class="btn primary" href="https://x.com/sehndurst" target="_blank" rel="noopener">▶ Follow the devlog</a>
-      <a class="btn ghost" href="#work">See the tools</a>
+  <div class="wrap cd-wrap">
+    <span class="kicker"><span class="blip"></span>Next stage · play.sehndurst.com</span>
+    <div class="cd" id="cd" data-target="2027-03-27T20:00:00+09:00" aria-live="polite">
+      <div class="u"><span class="n" id="cd-d">---</span><span class="l">Days</span></div>
+      <span class="sep" aria-hidden="true">:</span>
+      <div class="u"><span class="n" id="cd-h">--</span><span class="l">Hours</span></div>
+      <span class="sep" aria-hidden="true">:</span>
+      <div class="u"><span class="n" id="cd-m">--</span><span class="l">Min</span></div>
+      <span class="sep" aria-hidden="true">:</span>
+      <div class="u"><span class="n" id="cd-s">--</span><span class="l">Sec</span></div>
     </div>
+    <p class="cd-date" id="cd-date">2027.03.27 20:00 JST<span class="cursor" aria-hidden="true"></span></p>
   </div>
-  <div class="scroll-hint">Scroll<span class="arr">▼</span></div>
 </header>
-
-<section class="block" id="work">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="eyebrow">Stage 01 · Work</div>
-      <h2 class="title">Tools I've built</h2>
-      <p class="sub">Small utilities for Unity creators — all heading to the Asset Store.</p>
-      <div class="hint">PRESS ▶ TO SELECT</div>
-    </div>
-    <div class="bento">
-
-      <div class="card lg reveal">
-        <span class="lvl">01</span>
-        <div class="tile"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
-          <g fill="#b8ff2f"><rect x="5" y="1" width="6" height="1"/><rect x="4" y="2" width="1" height="12"/><rect x="11" y="2" width="1" height="12"/><rect x="5" y="14" width="6" height="1"/><rect x="7" y="12" width="2" height="1"/></g>
-          <g fill="#6e9a1e"><rect x="7" y="2" width="2" height="1"/><rect x="13" y="4" width="1" height="1"/><rect x="14" y="3" width="1" height="1"/><rect x="15" y="2" width="1" height="1"/></g>
-          <g fill="#ffffff"><rect x="7" y="5" width="1" height="5"/><rect x="8" y="6" width="1" height="3"/><rect x="9" y="7" width="1" height="1"/></g>
-        </svg></div>
-        <span class="chip"><span class="blip"></span>In review · Asset Store</span>
-        <h3>Animator Remote</h3>
-        <p>Drive Unity's Animator live from your phone.</p>
-        <pre class="hud" aria-hidden="true">▸ Animator: <span class="on">Player</span>
-──────────────────────
-Speed     ██████░░  <span class="on">3.2</span>
-Blend     ███░░░░░  <span class="on">0.4</span>
-Grounded  <span class="on">[ON]</span>
-State     <span class="dim">Idle</span> ▶ <span class="on">Run</span></pre>
-        <div class="grow"></div>
-        <a class="lnk" href="https://assetstore.unity.com/publishers/150022" target="_blank" rel="noopener">Unity Asset Store →</a>
-      </div>
-
-      <div class="card md reveal">
-        <span class="lvl">02</span>
-        <div class="tile"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
-          <g fill="#b8ff2f"><rect x="3" y="2" width="10" height="1"/><rect x="3" y="3" width="1" height="5"/><rect x="12" y="3" width="1" height="5"/><rect x="4" y="8" width="1" height="2"/><rect x="11" y="8" width="1" height="2"/><rect x="5" y="10" width="1" height="2"/><rect x="10" y="10" width="1" height="2"/><rect x="6" y="12" width="1" height="1"/><rect x="9" y="12" width="1" height="1"/><rect x="7" y="13" width="2" height="1"/></g>
-          <rect x="6" y="5" width="4" height="4" fill="#ffffff"/>
-          <rect x="8" y="7" width="2" height="2" fill="#6e9a1e"/>
-        </svg></div>
-        <span class="chip"><span class="blip"></span>In review</span>
-        <h3>Prefab Guard</h3>
-        <p>Snapshot and restore prefab overrides — recover what Undo can't.</p>
-        <div class="grow"></div>
-        <a class="lnk" href="https://assetstore.unity.com/publishers/150022" target="_blank" rel="noopener">Unity Asset Store →</a>
-      </div>
-
-      <div class="card md reveal">
-        <span class="lvl">03</span>
-        <div class="tile"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
-          <g fill="#b8ff2f"><rect x="6" y="3" width="4" height="4"/><rect x="2" y="9" width="4" height="4"/><rect x="10" y="9" width="4" height="4"/></g>
-          <g fill="#6e9a1e"><rect x="9" y="3" width="1" height="4"/><rect x="6" y="6" width="3" height="1"/><rect x="5" y="9" width="1" height="4"/><rect x="2" y="12" width="3" height="1"/><rect x="13" y="9" width="1" height="4"/><rect x="10" y="12" width="3" height="1"/></g>
-          <g fill="#ffffff"><rect x="6" y="3" width="1" height="1"/><rect x="2" y="9" width="1" height="1"/><rect x="10" y="9" width="1" height="1"/></g>
-        </svg></div>
-        <span class="chip"><span class="blip"></span>In review</span>
-        <h3>Prefab Bulk</h3>
-        <p>Sync, revert and apply overrides across many instances at once.</p>
-        <div class="grow"></div>
-        <a class="lnk" href="https://assetstore.unity.com/publishers/150022" target="_blank" rel="noopener">Unity Asset Store →</a>
-      </div>
-
-      <div class="card md reveal">
-        <span class="lvl">04</span>
-        <div class="tile"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
-          <g fill="#b8ff2f"><rect x="7" y="3" width="2" height="10"/><rect x="3" y="7" width="10" height="2"/></g>
-          <g fill="#6e9a1e"><rect x="8" y="3" width="1" height="10"/><rect x="3" y="8" width="10" height="1"/></g>
-          <g fill="#ffffff"><rect x="7" y="3" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/></g>
-        </svg></div>
-        <span class="chip"><span class="blip"></span>In queue</span>
-        <h3>Prefab Medic</h3>
-        <p>Rescues orphaned overrides before Unity silently drops them.</p>
-        <div class="grow"></div>
-        <a class="lnk" href="https://assetstore.unity.com/publishers/150022" target="_blank" rel="noopener">Unity Asset Store →</a>
-      </div>
-
-      <div class="card sm reveal">
-        <h4>Save file — 2026</h4>
-        <div class="save">
-          <div class="row"><span class="nm">Animator Remote</span><span class="dots"></span><span class="st">In review</span></div>
-          <div class="row"><span class="nm">Prefab Guard</span><span class="dots"></span><span class="st">In review</span></div>
-          <div class="row"><span class="nm">Prefab Bulk</span><span class="dots"></span><span class="st">In review</span></div>
-          <div class="row"><span class="nm">Prefab Medic</span><span class="dots"></span><span class="st">In queue</span></div>
-        </div>
-      </div>
-
-      <div class="card sm locked reveal">
-        <span class="lvl">05</span>
-        <h4>???</h4>
-        <p class="note">NEW TOOL LOADING <span class="blip-t">▮</span></p>
-      </div>
-
-      <div class="card wide reveal">
-        <h4>Runs everywhere</h4>
-        <span class="pill">Built-in</span><span class="pill">URP</span><span class="pill">HDRP</span><span class="pill">Custom RP</span>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <section class="block" id="contact">
   <div class="wrap">
@@ -393,6 +303,23 @@ State     <span class="dim">Idle</span> ▶ <span class="on">Run</span></pre>
       el.setAttribute('href','mai'+'lto:'+m);
       if(el.hasAttribute('data-mailto-show'))el.textContent=m;
     });
+  })();
+
+  /* countdown to play.sehndurst.com launch */
+  (function(){
+    var box=document.getElementById('cd');if(!box)return;
+    var target=new Date(box.getAttribute('data-target')).getTime();
+    var d=document.getElementById('cd-d'),h=document.getElementById('cd-h'),m=document.getElementById('cd-m'),s=document.getElementById('cd-s');
+    function pad(n,w){return String(n).padStart(w,'0');}
+    function tick(){
+      var left=Math.max(0,target-Date.now()),t=Math.floor(left/1000);
+      d.textContent=pad(Math.floor(t/86400),3);h.textContent=pad(Math.floor(t%86400/3600),2);
+      m.textContent=pad(Math.floor(t%3600/60),2);s.textContent=pad(t%60,2);
+      if(left<=0){clearInterval(iv);
+        var a=document.createElement('a');a.className='btn primary cd-open';a.href='https://play.sehndurst.com/';a.textContent='▶ Now open';
+        document.getElementById('cd-date').replaceWith(a);}
+    }
+    var iv=setInterval(tick,1000);tick();
   })();
 
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
